@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <script src="js/jquery-3.3.1.min.js"></script>
+</head> 
+<body onload="init();">
+
+	<div id="main">
+
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	
+	var alphab = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 
+		'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+
+	function init() {
+
+		$("body").keyup(function (event) {
+			var keyCode = event.which;
+			if (keyCode >= 65 && keyCode <= 94) {
+				var letter = alphab[keyCode - 65];
+				var duration = Math.floor(Math.random() * 2000) + 1;
+				var item = { "letter": letter , "duration": duration };
+				var itemStr = JSON.stringify(item);
+				$.ajax({ 
+					type: "POST",
+    				url: "/api/item",
+    				data: itemStr,
+    				contentType: "application/json; charset=utf-8",
+    				success: function(data) { $("#main").append("<div>Sent " + itemStr + "</div>"); },
+    				error: function(xhr, error) { $("#main").append("<div>Error " + error + "</div>");  }
+    			});
+			}
+		});
+
+	}
+
+</script>
+</html>
