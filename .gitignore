@@ -20,3 +20,6 @@ buildNumber.properties
 .classpath
 .project
 .settings/
+
+# Vert.x
+.vertx/
