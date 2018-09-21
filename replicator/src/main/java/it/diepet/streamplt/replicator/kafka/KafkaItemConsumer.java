@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
@@ -39,11 +38,12 @@ public class KafkaItemConsumer {
 	public void start() {
 		init();
 		while (true) {
-			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
-			for (ConsumerRecord<String, String> record : records) {
-				LOGGER.info("Consumed item " + record.value());
+			ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(200));
+			if (!records.isEmpty()) {
+				LOGGER.debug("Received {} records to consume", records.count());
+				KafkaItemProducer.getInstance().send(records);
+				consumer.commitAsync();
 			}
-			consumer.commitAsync();
 		}
 	}
 
