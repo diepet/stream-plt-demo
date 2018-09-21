@@ -12,6 +12,7 @@
 	<properties>
 		<junit.version>4.12</junit.version>
 		<vertx.version>3.5.3</vertx.version>
+		<kafka.version>2.0.0</kafka.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j2.version>2.11.1</log4j2.version>
 		<disruptor.version>3.4.2</disruptor.version>
@@ -32,6 +33,12 @@
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-web</artifactId>
 			<version>${vertx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>${kafka.version}</version>
 		</dependency>
 
 		<dependency>

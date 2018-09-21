@@ -11,6 +11,7 @@ import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.StaticHandler;
+import it.diepet.streamplt.transmitter.kafka.KafkaItemProducer;
 
 public class TransmitterVerticle extends AbstractVerticle {
 
@@ -24,7 +25,8 @@ public class TransmitterVerticle extends AbstractVerticle {
 		Route route = router.route().path("/api/item");
 		route.handler(routingContext -> {
 			String item = routingContext.getBodyAsString();
-			LOGGER.debug("Received " + item);
+			LOGGER.debug("Received from web UI " + item);
+			KafkaItemProducer.getInstance().send(item);
 			// This handler will be called for every request
 			HttpServerResponse response = routingContext.response();
 			response.putHeader("content-type", "text/plain");
