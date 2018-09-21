@@ -1,8 +1,8 @@
 # Data Confluent folders
-confluent1/data-kafka
-confluent1/data-zoo
-confluent2/data-kafka
-confluent2/data-zoo
+data-zoo/
+log-zoo/
+data-kafka/
+log-kafka/
 
 # Maven
 target/
