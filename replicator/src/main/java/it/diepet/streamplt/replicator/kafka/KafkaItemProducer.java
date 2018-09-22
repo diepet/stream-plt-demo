@@ -51,9 +51,9 @@ public class KafkaItemProducer {
 					@Override
 					public void onCompletion(RecordMetadata metadata, Exception exception) {
 						if (exception == null) {
-							LOGGER.debug("Sent to Kafka item having UUID: {}", producerRecord.key());
+							LOGGER.debug("Sent to Kafka item ({}): {}", producerRecord.key(), producerRecord.value());
 						} else {
-							LOGGER.error("Some error occurred while trying to send item having UUID: " + producerRecord.key(), exception);
+							LOGGER.error("Some error occurred while trying to send item: " + producerRecord.value(), exception);
 						}
 					}
 				});

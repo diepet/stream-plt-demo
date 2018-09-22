@@ -36,16 +36,16 @@ public class KafkaItemProducer {
 		producer = new KafkaProducer<>(props);
 	}
 
-	public void send(String item) {
+	public void send(final String item) {
 		final String uuid = UUID.randomUUID().toString();
 		ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC_NAME, uuid, item);
 		producer.send(record, new Callback() {
 			@Override
 			public void onCompletion(RecordMetadata metadata, Exception exception) {
 				if (exception == null) {
-					LOGGER.debug("Sent to Kafka item having UUID: {}", uuid);
+					LOGGER.debug("Sent to Kafka item ({}): {}", uuid, item);
 				} else {
-					LOGGER.error("Some error occurred while trying to send item having UUID: " + uuid, exception);
+					LOGGER.error("Some error occurred while trying to send item " + item, exception);
 				}
 			}
 		});
