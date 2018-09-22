@@ -34,7 +34,7 @@ public class TransmitterVerticle extends AbstractVerticle {
 			// Write to the response and end it
 			response.end("OK");
 		});
-		router.route("/static/*").handler(StaticHandler.create().  setWebRoot("webcontent"));
+		router.route("/static/*").handler(StaticHandler.create().setWebRoot("webcontent"));
 		server.requestHandler(router::accept).listen(8080);
 	}
 

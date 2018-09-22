@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/vertx-eventbus.js"></script>
+</head> 
+<body onload="init();">
+
+	<div id="main">
+		Hi
+	</div>
+
+</body>
+
+<script type="text/javascript">
+
+	let eventBus;
+
+	function init() {
+		eventBus = new EventBus("http://localhost:8081/eventbus");
+  		eventBus.onopen = function () {
+    		eventBus.registerHandler('out', function (error, message) {
+      			const item = message.body;
+      			$("#main").append("<div>Sent " + item + "</div>");
+    		});
+		}
+	}
+
+</script>
+</html>
