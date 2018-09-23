@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="wavish.js"></script>
+</head>
+<body onload="init();">
+
+	<div id="main">
+	
+	</div>
+
+</body>
+
+<script>
+
+var wave = null;
+function init() {
+	// read (width, height) viewport
+	var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0];
+    var width = w.innerWidth || e.clientWidth || g.clientWidth;
+    var height = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	
+	// create Wave 
+	wave = new Wave("main", {width: width, height: height});
+	wave.start();
+	
+	
+}
+
+</script>
+
+</html>
