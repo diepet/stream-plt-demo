@@ -3,6 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/sockjs.min.js"></script>
   <script src="js/vertx-eventbus.js"></script>
 </head> 
 <body onload="init();">
@@ -19,12 +20,15 @@
 
 	function init() {
 		eventBus = new EventBus("http://localhost:8081/eventbus");
+		eventBus.enableReconnect(true);
   		eventBus.onopen = function () {
-    		eventBus.registerHandler('out', function (error, message) {
+    		eventBus.registerHandler('items', function (error, message) {
       			const item = message.body;
       			$("#main").append("<div>Sent " + item + "</div>");
     		});
+    		console.log("Connected");
 		}
+
 	}
 
 </script>
